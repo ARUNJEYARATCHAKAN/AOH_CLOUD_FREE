@@ -1,0 +1,38 @@
+projection;
+strict ( 2 );
+
+define behavior for ZAP_C_TRAVEL_REQ_01 alias TravelProcessor
+use etag
+
+{
+  field ( readonly ) TotalPrice;
+
+  use create;
+  use update;
+  use delete;
+
+  use action copyTravel;
+
+  use association _BOOKING { create; }
+
+}
+
+define behavior for ZAP_C_BOOKING_REQ_01 alias BookingProcessor
+use etag
+{
+  use update;
+//  use delete; // workaround for missing determination on delete
+
+  use association _BOOKSUPPLEMENT { create; }
+  use association _Travel { }
+}
+
+
+define behavior for ZAP_C_BOOKSUP_REQ_01 alias BookSupplProcessor
+use etag
+{
+  use update;
+//  use delete; // workaround for missing determination on delete
+  use association _Travel  { }
+  use association _Booking { }
+}

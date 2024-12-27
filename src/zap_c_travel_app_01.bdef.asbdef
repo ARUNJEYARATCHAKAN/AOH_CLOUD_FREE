@@ -1,0 +1,21 @@
+projection;
+strict ( 2 );
+
+define behavior for ZAP_C_TRAVEL_APP_01 alias Approver
+use etag
+{
+  field ( readonly ) BeginDate, EndDate, TotalPrice, CustomerID;
+
+  use update;
+
+  use action acceptTravel;
+  use action rejectTravel;
+}
+
+
+//define behavior for ZAP_C_BOOKING_APP_01 alias booking
+//{
+//  use update;
+//
+//  use association _Travel;
+//}
